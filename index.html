@@ -341,9 +341,12 @@
     </style>
 </head>
 <body>
-    <!-- Vídeo de fundo do YouTube -->
+    <!-- Vídeo de fundo do YouTube CORRIGIDO -->
     <div id="youtube-bg">
-        <iframe src="https://youtu.be/0MBWY3n8PC0?si=6zID7DjZ76Xj2VgQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/0MBWY3n8PC0?autoplay=1&mute=1&loop=1&playlist=0MBWY3n8PC0&controls=0&modestbranding=1&rel=0" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen></iframe>
     </div>
     
     <!-- Overlay escuro para melhorar a legibilidade -->
@@ -413,7 +416,7 @@
         const config = {
             name: "CHALOX",
             bio: "Doutrinado Pelo Odio",
-            profilePic: "video/chalox.jpg", // Atualizado para usar a imagem local
+            profilePic: "video/chalox.jpg",
             primaryColor: "#8a2be2",
             secondaryColor: "#ff2d75",
             glowIntensity: 0.6,
@@ -544,6 +547,15 @@
 
         // Inicializar
         createParticles();
+
+        // Fallback para o vídeo caso não carregue
+        setTimeout(() => {
+            if (!document.querySelector('#youtube-bg iframe').contentWindow.document) {
+                document.getElementById('youtube-bg').innerHTML = `
+                    <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:url('https://i.ytimg.com/vi/0MBWY3n8PC0/maxresdefault.jpg') center/cover no-repeat;"></div>
+                `;
+            }
+        }, 5000);
     </script>
 </body>
 </html>
