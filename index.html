@@ -36,15 +36,38 @@
             align-items: center;
         }
 
-        /* Vídeo de fundo da tela principal */
-        #main-video-bg {
+        /* Vídeo de fundo do YouTube */
+        #youtube-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
             z-index: -2;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        #youtube-bg iframe {
+            width: 100vw;
+            height: 56.25vw; /* 16:9 aspect ratio */
+            min-height: 100vh;
+            min-width: 177.77vh; /* 16:9 aspect ratio */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Overlay escuro para melhorar a legibilidade */
+        #video-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: -1;
         }
 
         /* Tela de entrada com transparência */
@@ -318,10 +341,13 @@
     </style>
 </head>
 <body>
-    <!-- Vídeo de fundo da tela principal -->
-    <video autoplay muted loop id="main-video-bg">
-        <source src="" type="video/mp4">
-    </video>
+    <!-- Vídeo de fundo do YouTube -->
+    <div id="youtube-bg">
+        <iframe src="https://www.youtube.com/embed/0MBWY3n8PC0?autoplay=1&mute=1&loop=1&playlist=0MBWY3n8PC0&controls=0&disablekb=1&fs=0&modestbranding=1&rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    
+    <!-- Overlay escuro para melhorar a legibilidade -->
+    <div id="video-overlay"></div>
 
     <!-- Tela de entrada -->
     <div id="enter-screen">
@@ -416,14 +442,8 @@
         const enterScreen = document.getElementById('enter-screen');
         const mainContent = document.getElementById('main-content');
         const bgMusic = document.getElementById('bg-music');
-        const mainVideoBg = document.getElementById('main-video-bg');
         const cursor = document.querySelector('.custom-cursor');
         const cursorFollower = document.querySelector('.cursor-follower');
-
-        // Configurar vídeo de fundo principal
-        mainVideoBg.muted = true;
-        mainVideoBg.loop = true;
-        mainVideoBg.play();
 
         // Quando clicar na tela de entrada
         enterScreen.addEventListener('click', () => {
