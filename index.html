@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CHALOX | rare</title>
+    <title>CHALOX | THE PRIME</title>
     <link rel="shortcut icon" href="1.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-color: #0a0a0a;
-            --primary-color: #8a2be2;
-            --secondary-color: #ff2d75;
-            --text-color: #f0f0f0;
+            --primary-color: #ff0000;
+            --secondary-color: #8B0000;
+            --text-color: #ffffff;
             --text-muted: rgba(255, 255, 255, 0.6);
-            --card-bg: rgba(30, 30, 30, 0.6);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --glow-intensity: 0.6;
+            --card-bg: rgba(30, 30, 30, 0.8);
+            --card-border: rgba(255, 0, 0, 0.3);
         }
 
         * {
@@ -26,169 +25,112 @@
         }
 
         body {
-            background: var(--bg-color);
+            background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: 'Sora', sans-serif;
+            font-family: 'Inter', sans-serif;
             min-height: 100vh;
-            overflow: hidden;
+            overflow-x: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 0, 0, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(139, 0, 0, 0.1) 0%, transparent 40%);
+            cursor: none;
         }
 
-        /* Vídeo de fundo do YouTube */
-        #youtube-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        #youtube-bg iframe {
-            width: 100vw;
-            height: 56.25vw; /* 16:9 aspect ratio */
-            min-height: 100vh;
-            min-width: 177.77vh; /* 16:9 aspect ratio */
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        /* Overlay escuro para melhorar a legibilidade */
-        #video-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: -1;
-        }
-
-        /* Tela de entrada com transparência */
         #enter-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: rgba(0, 0, 0, 0.9);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: rgba(0, 0, 0, 0.3);
-            z-index: 1000;
+            z-index: 9999;
             cursor: pointer;
-            backdrop-filter: blur(8px);
-            transition: all 1s ease;
         }
 
         #enter-screen h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: pulse 2s infinite;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            color: #ff0000;
+            text-align: center;
+            transition: transform 0.3s ease;
         }
 
         #enter-screen p {
-            color: var(--text-color);
-            font-size: 1.2rem;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            color: var(--text-muted);
+            font-size: 1rem;
+            animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 1; }
-            100% { transform: scale(1); opacity: 0.8; }
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        #enter-screen h1:hover {
+            transform: scale(1.05);
         }
 
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 450px;
             padding: 2rem;
             position: relative;
             z-index: 1;
             display: none;
-            margin: 0 auto;
         }
 
-        .main-wrapper {
+        .profile-section {
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
-        }
-
-        .profile-header {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 2rem;
-            position: relative;
-            width: 100%;
+            margin-bottom: 2.5rem;
             text-align: center;
         }
 
-        .profile-pic-container {
-            position: relative;
+        .profile-pic {
             width: 120px;
             height: 120px;
-            margin-bottom: 1.5rem;
-        }
-
-        .profile-pic {
-            width: 100%;
-            height: 100%;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--primary-color);
-            box-shadow: 0 0 30px rgba(138, 43, 226, var(--glow-intensity));
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+            transition: transform 0.3s ease;
         }
 
         .profile-pic:hover {
             transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(138, 43, 226, calc(var(--glow-intensity) + 0.2));
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.7);
         }
 
         .profile-name {
             font-size: 2rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 10px rgba(138, 43, 226, 0.3);
+            color: var(--primary-color);
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
         }
 
         .profile-bio {
-            color: #e9e7e8d5;
-            font-size: 1rem;
-            font-weight: 500;
-            max-width: 80%;
-            text-align: center;
-            line-height: 1.5;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            max-width: 90%;
+            line-height: 1.6;
         }
 
-        .links-container {
+        .links-section {
             display: flex;
             flex-direction: column;
             gap: 1rem;
             width: 100%;
-            align-items: center;
         }
 
         .link-card {
@@ -196,23 +138,21 @@
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 1rem;
+            border-radius: 8px;
+            padding: 1.2rem;
             display: flex;
             align-items: center;
             text-decoration: none;
             color: var(--text-color);
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             width: 100%;
-            max-width: 400px;
         }
 
         .link-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            border-color: rgba(255, 255, 255, 0.2);
-            background: rgba(40, 40, 40, 0.7);
+            border-color: var(--primary-color);
+            background: rgba(50, 50, 50, 0.8);
+            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.3);
         }
 
         .link-icon {
@@ -221,10 +161,11 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 0, 0, 0.1);
             border-radius: 8px;
             margin-right: 1rem;
             font-size: 1.2rem;
+            color: var(--primary-color);
         }
 
         .link-content {
@@ -234,12 +175,12 @@
 
         .link-title {
             font-weight: 500;
-            font-size: 1rem;
+            font-size: 0.95rem;
             margin-bottom: 0.2rem;
         }
 
         .link-description {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             color: var(--text-muted);
             opacity: 0.8;
         }
@@ -248,331 +189,409 @@
             display: flex;
             justify-content: center;
             gap: 1.5rem;
-            margin: 2rem 0;
-            width: 100%;
+            margin-top: 2rem;
         }
 
         .social-link {
-            color: var(--text-color);
+            color: var(--text-muted);
             font-size: 1.5rem;
             transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
         }
 
         .social-link:hover {
             color: var(--primary-color);
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.2);
+            background: rgba(255, 0, 0, 0.2);
         }
 
-        .floating-particles {
+        /* Contador de visitas */
+        .visitor-counter {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            color: var(--primary-color);
+            z-index: 100;
+            font-size: 1rem;
+            display: none;
+        }
+
+        /* Controle de volume */
+        .volume-control {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            z-index: 100;
+        }
+
+        .volume-icon {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .volume-icon:hover {
+            color: var(--primary-color);
+        }
+
+        .volume-slider {
+            width: 0;
+            height: 4px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .volume-control:hover .volume-slider {
+            width: 80px;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 12px;
+            height: 12px;
+            background: var(--primary-color);
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        /* Cursor personalizado */
+        .custom-cursor {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            font-size: 16px;
+            color: var(--primary-color);
+            text-shadow: 0 0 5px #ff0000;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease;
+        }
+
+        /* Efeitos de sangue/partículas */
+        .blood-particles {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
             z-index: -1;
+            pointer-events: none;
         }
 
-        .particle {
+        .blood-particle {
             position: absolute;
-            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            background: var(--primary-color);
             border-radius: 50%;
-            opacity: 0.3;
-            animation: float 15s infinite linear;
+            opacity: 0;
+            animation: blood-drip linear infinite;
         }
 
-        @keyframes float {
+        @keyframes blood-drip {
             0% {
-                transform: translateY(0) rotate(0deg);
+                transform: translateY(-100px) translateX(var(--random-x));
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
             }
             100% {
-                transform: translateY(-100vh) rotate(360deg);
+                transform: translateY(100vh) translateX(var(--random-x));
+                opacity: 0;
             }
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 480px) {
             .container {
                 padding: 1.5rem;
             }
             
-            .profile-name {
+            #enter-screen h1 {
                 font-size: 1.8rem;
             }
             
-            .profile-bio {
-                font-size: 0.9rem;
-                max-width: 90%;
+            .profile-name {
+                font-size: 1.5rem;
             }
             
-            #enter-screen h1 {
-                font-size: 2rem;
+            .profile-bio {
+                font-size: 0.8rem;
             }
             
             .link-card {
-                max-width: 100%;
+                padding: 1rem;
             }
-        }
-
-        /* Efeito de cursor personalizado */
-        .custom-cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: rgba(138, 43, 226, 0.5);
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            mix-blend-mode: screen;
-            z-index: 9999;
-            transition: transform 0.1s ease;
-        }
-
-        .cursor-follower {
-            position: fixed;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid rgba(138, 43, 226, 0.3);
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 9998;
-            transition: transform 0.3s ease, width 0.3s ease, height 0.3s ease;
+            
+            .link-title {
+                font-size: 0.8rem;
+            }
+            
+            .link-description {
+                font-size: 0.6rem;
+            }
+            
+            .volume-control:hover .volume-slider {
+                width: 60px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Vídeo de fundo do YouTube CORRIGIDO -->
-    <div id="youtube-bg">
-        <iframe src="https://www.youtube.com/embed/0MBWY3n8PC0?autoplay=1&mute=1&loop=1&playlist=0MBWY3n8PC0&controls=0&modestbranding=1&rel=0" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen></iframe>
-    </div>
-    
-    <!-- Overlay escuro para melhorar a legibilidade -->
-    <div id="video-overlay"></div>
-
     <!-- Tela de entrada -->
     <div id="enter-screen">
-        <h1>CLICK TO ENTER...</h1>
-        <p>Prepare-se para a experiência</p>
+        <h1>CHALOX THE PRIME</h1>
+        <p>CLIQUE PARA ENTRAR</p>
     </div>
 
-    <!-- Cursor personalizado -->
-    <div class="custom-cursor"></div>
-    <div class="cursor-follower"></div>
+    <!-- Efeitos de sangue -->
+    <div class="blood-particles" id="blood-particles"></div>
 
-    <!-- Partículas flutuantes -->
-    <div class="floating-particles" id="particles"></div>
+    <!-- Conteúdo principal -->
+    <div class="container" id="main-container">
+        <!-- Contador de visitas (olho) -->
+        <div class="visitor-counter" id="visitor-counter">
+            <i class="fas fa-eye"></i>
+            <span id="visitor-count">0</span>
+        </div>
 
-    <!-- Conteúdo principal (inicialmente oculto) -->
-    <div class="container" id="main-content">
-        <div class="main-wrapper">
-            <header class="profile-header">
-                <div class="profile-pic-container">
-                    <img src="video/chalox.jpg" alt="CHALOX" class="profile-pic" id="profile-pic">
+        <!-- Controle de volume -->
+        <div class="volume-control" id="volume-control">
+            <i class="fas fa-volume-up volume-icon" id="volume-icon"></i>
+            <input type="range" min="0" max="1" step="0.01" value="0.3" class="volume-slider" id="volume-slider">
+        </div>
+
+        <section class="profile-section">
+            <img src="video/chalox.jpg" alt="CHALOX" class="profile-pic">
+            <h1 class="profile-name">CHALOX</h1>
+            <p class="profile-bio">DOUTRINADO PELO ÓDIO</p>
+        </section>
+
+        <section class="links-section">
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/silvasx_zn/?next=%2F&hl=en" class="link-card" target="_blank">
+                <div class="link-icon">
+                    <i class="fab fa-instagram"></i>
                 </div>
-                <h1 class="profile-name" id="profile-name">CHALOX</h1>
-                <p class="profile-bio" id="profile-bio">Doutrinado Pelo Odio</p>
-            </header>
+                <div class="link-content">
+                    <div class="link-title">INSTAGRAM</div>
+                    <div class="link-description">SIGA-ME NO INSTAGRAM</div>
+                </div>
+            </a>
 
-            <div class="links-container">
-                <a href="https://www.instagram.com/silvasx_zn/?next=%2F&hl=en" class="link-card">
-                    <div class="link-icon">
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                    <div class="link-content">
-                        <div class="link-title">Instagram</div>
-                        <div class="link-description">Siga-me no Instagram</div>
-                    </div>
-                </a>
+            <!-- YouTube -->
+            <a href="https://www.youtube.com/@silvasz_zn" class="link-card" target="_blank">
+                <div class="link-icon">
+                    <i class="fab fa-youtube"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">YOUTUBE</div>
+                    <div class="link-description">ASSISTA MEUS VÍDEOS</div>
+                </div>
+            </a>
 
-                <a href="https://www.youtube.com/@silvasz_zn" class="link-card">
-                    <div class="link-icon">
-                        <i class="fab fa-youtube"></i>
-                    </div>
-                    <div class="link-content">
-                        <div class="link-title">YouTube</div>
-                        <div class="link-description">Assista meus vídeos</div>
-                    </div>
-                </a>
-                
-                <!-- Novo card para a loja de programação ChaloxCode -->
-                <a href="https://123456789chalo.github.io/chaloxcode/" class="link-card">
-                    <div class="link-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <div class="link-content">
-                        <div class="link-title">Ppcode</div>
-                        <div class="link-description">Loja de Programação - Escolha seu serviço</div>
-                    </div>
-                </a>
-            </div>
+            <!-- Ppcode -->
+            <a href="https://123456789chalo.github.io/chaloxcode/" class="link-card" target="_blank">
+                <div class="link-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="link-content">
+                    <div class="link-title">PPCODE</div>
+                    <div class="link-description">LOJA DE PROGRAMAÇÃO</div>
+                </div>
+            </a>
+        </section>
 
-            <div class="social-links">
-                <a href="https://www.twitch.tv/chalox_" class="social-link"><i class="fab fa-twitch"></i></a>
-                <a href="https://www.tiktok.com/@silvasx_zn" class="social-link"><i class="fab fa-tiktok"></i></a>
-                <a href="https://discord.gg/SeawQCZGXP" class="social-link"><i class="fab fa-discord"></i></a>
-            </div>
+        <div class="social-links">
+            <a href="https://www.twitch.tv/chalox_" class="social-link" target="_blank">
+                <i class="fab fa-twitch"></i>
+            </a>
+            <a href="https://www.tiktok.com/@silvasx_zn" class="social-link" target="_blank">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            <a href="https://discord.gg/SeawQCZGXP" class="social-link" target="_blank">
+                <i class="fab fa-discord"></i>
+            </a>
         </div>
     </div>
 
-    <!-- Áudio da música -->
-    <audio id="bg-music" loop>
-        <source src="video/HERE - Hood Trap.mp3" type="audio/mp3">
-    </audio>
+    <!-- Cursor personalizado -->
+    <div class="custom-cursor" id="custom-cursor">ÓDIO</div>
+
+    <!-- Player de música do YouTube (oculto) -->
+    <iframe id="youtube-player" width="0" height="0" src="https://youtu.be/wrvN87l3s08?si=Nr_gTpq0Kd04iIiC" frameborder="0" allow="autoplay" style="display: none;"></iframe>
 
     <script>
-        // Configurações personalizáveis
+        // Configurações
         const config = {
-            name: "CHALOX",
-            bio: "Doutrinado Pelo Odio",
-            profilePic: "video/chalox.jpg",
-            primaryColor: "#8a2be2",
-            secondaryColor: "#ff2d75",
-            glowIntensity: 0.6,
-            links: [
-                {
-                    title: "Instagram",
-                    description: "Siga-me no Instagram",
-                    url: "https://www.instagram.com/silvasx_zn/?next=%2F&hl=en",
-                    icon: "fab fa-instagram"
-                },
-                {
-                    title: "YouTube",
-                    description: "Assista meus vídeos",
-                    url: "https://www.youtube.com/@silvasz_zn",
-                    icon: "fab fa-youtube"
-                },
-                {
-                    title: "Ppcode",
-                    description: "Loja de Programação - Escolha seu serviço",
-                    url: "https://bit.ly/Ppcode",
-                    icon: "fas fa-code"
-                }
-            ],
-            socialLinks: [
-                { icon: "fab fa-twitch", url: "https://www.twitch.tv/chalox_" },
-                { icon: "fab fa-tiktok", url: "https://www.tiktok.com/@silvasx_zn" },
-                { icon: "fab fa-discord", url: "https://discord.gg/SeawQCZGXP" }
-            ]
+            primaryColor: "#ff0000",
+            secondaryColor: "#8B0000",
+            visitorCount: localStorage.getItem('visitorCount') || 0
         };
 
-        // Elementos da tela
+        // Elementos
         const enterScreen = document.getElementById('enter-screen');
-        const mainContent = document.getElementById('main-content');
-        const bgMusic = document.getElementById('bg-music');
-        const cursor = document.querySelector('.custom-cursor');
-        const cursorFollower = document.querySelector('.cursor-follower');
+        const container = document.getElementById('main-container');
+        const customCursor = document.getElementById('custom-cursor');
+        const visitorCounter = document.getElementById('visitor-counter');
+        const visitorCountElement = document.getElementById('visitor-count');
+        const volumeControl = document.getElementById('volume-control');
+        const volumeIcon = document.getElementById('volume-icon');
+        const volumeSlider = document.getElementById('volume-slider');
+        const youtubePlayer = document.getElementById('youtube-player');
 
-        // Quando clicar na tela de entrada
-        enterScreen.addEventListener('click', () => {
-            // Tocar a música de fundo
-            bgMusic.volume = 0.5;
-            bgMusic.play().catch(e => {
-                console.log("Autoplay bloqueado:", e);
-                enterScreen.innerHTML += '<button id="enable-sound" style="margin-top: 20px; padding: 10px 20px; background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)); border: none; border-radius: 5px; color: white; cursor: pointer;">Ativar Som</button>';
-                
-                document.getElementById('enable-sound').addEventListener('click', () => {
-                    bgMusic.play();
-                    document.getElementById('enable-sound').style.display = 'none';
-                });
+        // Estado do volume
+        let isMuted = false;
+        let lastVolume = 0.3;
+        let player;
+
+        // Carregar API do YouTube
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
             });
-            
-            // Aumentar o desfoque e escurecer durante a transição
-            enterScreen.style.backdropFilter = 'blur(15px)';
-            enterScreen.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+        }
+
+        function onPlayerReady(event) {
+            event.target.setVolume(30);
+            event.target.playVideo();
+        }
+
+        function onPlayerStateChange(event) {
+            // Pode adicionar lógica adicional aqui se necessário
+        }
+
+        // Carregar API do YouTube dinamicamente
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        // Incrementar contador de visitas
+        function incrementVisitorCount() {
+            config.visitorCount = parseInt(config.visitorCount) + 1;
+            localStorage.setItem('visitorCount', config.visitorCount);
+            visitorCountElement.textContent = config.visitorCount;
+        }
+
+        // Mostrar conteúdo quando clicar na tela de entrada
+        enterScreen.addEventListener('click', () => {
+            // Incrementar contador
+            incrementVisitorCount();
             
             // Efeito de transição
             enterScreen.style.opacity = '0';
-            enterScreen.style.transition = 'all 1s ease';
+            enterScreen.style.transition = 'opacity 0.5s ease';
             
             // Mostrar conteúdo principal após a transição
             setTimeout(() => {
                 enterScreen.style.display = 'none';
-                mainContent.style.display = 'block';
+                container.style.display = 'block';
                 
-                // Efeito de fade-in no conteúdo
-                mainContent.style.opacity = '0';
-                mainContent.style.transition = 'opacity 1s ease';
-                setTimeout(() => {
-                    mainContent.style.opacity = '1';
-                }, 100);
-            }, 1000);
+                // Mostrar controles
+                visitorCounter.style.display = 'block';
+                volumeControl.style.display = 'flex';
+                
+                // Iniciar efeitos de sangue
+                createBloodParticles();
+            }, 500);
         });
 
-        // Aplicar configurações
-        document.getElementById('profile-name').textContent = config.name;
-        document.getElementById('profile-bio').textContent = config.bio;
-        document.getElementById('profile-pic').src = config.profilePic;
+        // Controle de volume
+        volumeSlider.addEventListener('input', (e) => {
+            const volume = e.target.value * 100;
+            if (player) {
+                player.setVolume(volume);
+            }
+            lastVolume = e.target.value;
+            
+            if (e.target.value == 0) {
+                volumeIcon.className = 'fas fa-volume-mute volume-icon';
+                isMuted = true;
+            } else {
+                volumeIcon.className = 'fas fa-volume-up volume-icon';
+                isMuted = false;
+            }
+        });
 
-        // Atualizar cores
-        document.documentElement.style.setProperty('--primary-color', config.primaryColor);
-        document.documentElement.style.setProperty('--secondary-color', config.secondaryColor);
-        document.documentElement.style.setProperty('--glow-intensity', config.glowIntensity);
+        volumeIcon.addEventListener('click', () => {
+            if (isMuted) {
+                if (player) {
+                    player.setVolume(lastVolume * 100);
+                }
+                volumeSlider.value = lastVolume;
+                volumeIcon.className = 'fas fa-volume-up volume-icon';
+                isMuted = false;
+            } else {
+                if (player) {
+                    player.setVolume(0);
+                }
+                volumeSlider.value = 0;
+                volumeIcon.className = 'fas fa-volume-mute volume-icon';
+                isMuted = true;
+            }
+        });
 
         // Cursor personalizado
         document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                cursorFollower.style.left = e.clientX + 'px';
-                cursorFollower.style.top = e.clientY + 'px';
-            }, 100);
+            customCursor.style.left = e.clientX + 'px';
+            customCursor.style.top = e.clientY + 'px';
         });
 
         document.querySelectorAll('a, button').forEach(el => {
             el.addEventListener('mouseenter', () => {
-                cursorFollower.style.width = '30px';
-                cursorFollower.style.height = '30px';
-                cursorFollower.style.borderColor = config.primaryColor;
+                customCursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                customCursor.style.color = '#ff0000';
             });
             
             el.addEventListener('mouseleave', () => {
-                cursorFollower.style.width = '40px';
-                cursorFollower.style.height = '40px';
-                cursorFollower.style.borderColor = 'rgba(138, 43, 226, 0.3)';
+                customCursor.style.transform = 'translate(-50%, -50%) scale(1)';
+                customCursor.style.color = config.primaryColor;
             });
         });
 
-        // Partículas flutuantes
-        function createParticles() {
-            const particlesContainer = document.getElementById('particles');
+        // Criar efeitos de sangue
+        function createBloodParticles() {
+            const bloodContainer = document.getElementById('blood-particles');
             const particleCount = 15;
             
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
-                particle.classList.add('particle');
+                particle.classList.add('blood-particle');
                 
-                const size = Math.random() * 10 + 5;
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100 + 100;
-                const duration = Math.random() * 20 + 10;
-                const delay = Math.random() * -20;
+                const size = Math.random() * 5 + 2;
+                const randomX = Math.random() * 100;
+                const duration = Math.random() * 10 + 5;
+                const delay = Math.random() * -10;
                 
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
-                particle.style.left = `${posX}%`;
-                particle.style.top = `${posY}%`;
+                particle.style.setProperty('--random-x', `${randomX}vw`);
                 particle.style.animationDuration = `${duration}s`;
                 particle.style.animationDelay = `${delay}s`;
                 
-                particlesContainer.appendChild(particle);
+                bloodContainer.appendChild(particle);
             }
         }
-
-        // Inicializar
-        createParticles();
-
-        // Fallback para o vídeo caso não carregue
-        setTimeout(() => {
-            if (!document.querySelector('#youtube-bg iframe').contentWindow.document) {
-                document.getElementById('youtube-bg').innerHTML = `
-                    <div style="position:absolute; top:0; left:0; width:100%; height:100%; background:url('https://i.ytimg.com/vi/0MBWY3n8PC0/maxresdefault.jpg') center/cover no-repeat;"></div>
-                `;
-            }
-        }, 5000);
     </script>
 </body>
 </html>
